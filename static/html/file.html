@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <title>file</title>
+</head>
+
+<body>
+
+    <input type="file" id="file">
+    <button onclick="doUpload()">提交</button>
+    <img>
+</body>
+<script>
+    function doUpload() {
+        let file = $('#file').get(0).files[0] //获取上传图片
+            //将图片转成formdata格式
+        let formdata = new FormData() //创建一个新formdata对象
+            //将图片添加进去
+        formdata.append('uploads', file) //formdata特殊添加方法
+        console.log('file', file)
+
+        $.ajax({
+            url: 'http://localhost:5000/file/upload',
+            type: 'POST',
+            cache: false,
+            data: formdata,
+            processData: false, //data值是FormData对象，不需要对数据做处理
+            contentType: false, //在form标签中，添加enctype="multipart/form-data"对form表单构造FormData对象，此处不需要设置
+            success: function(data) {
+                console.log(data)
+                if (data.err == 0) {
+                    $('img').attr('src', data.img)
+                } else {
+                    alert('error')
+                }
+            }
+        })
+    }
+</script>
+
+</html>
