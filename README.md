@@ -15,4 +15,5 @@
 ```js
  node server.js
 ```
-+ 若你想直接测试用，可访问使用我的在线接口
++ 若你想直接测试用，可访问使用我的博客
+[阿里云node接口部署](https://www.cnblogs.com/xmjs/p/13336825.html)
